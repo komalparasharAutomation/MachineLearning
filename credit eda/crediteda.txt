@@ -1,0 +1,18 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+previous_application = pd.read_csv(r"C:\Users\komal\Downloads\previous_application.csv")
+print(previous_application.columns)
+
+previous_application_percent = round(100*(previous_application.isnull().sum()/len(previous_application.index)), 2)
+previous_application_percent
+
+previous_application = previous_application.drop(['RATE_INTEREST_PRIMARY','RATE_INTEREST_PRIVILEGED','AMT_DOWN_PAYMENT','RATE_DOWN_PAYMENT'],axis =1)
+
+
+application_data = pd.read_csv(r"C:\Users\komal\Downloads\application_data.csv")
+application_prev_data = application_data.merge(previous_application, left_on='SK_ID_CURR', right_on='SK_ID_CURR', how='inner')
+print(application_prev_data.info())
+application_prev_data.head(10)
+
